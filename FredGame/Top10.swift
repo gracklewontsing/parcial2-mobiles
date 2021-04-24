@@ -13,7 +13,7 @@ class Top10 {
        
     func add(newScore : Score) {
         top10List.append(newScore)
-        
+        service.makePostCall(newScore: newScore)
         if top10List.count > 10 {
             top10List = Array(top10List[0...9])
         }

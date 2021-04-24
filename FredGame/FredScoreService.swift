@@ -64,9 +64,15 @@ class FredScoreService {
             print("Error: cannot create URL")
             return
         }
-    
+        let dateF = DateFormatter()
+        dateF.dateFormat = "YYYY-MM-dd"
+        //dateF.string(from: newScore.date)
+        let rawData:[String: Any] = ["name":newScore.name, "points":String(newScore.points),"date":dateF.string(from: newScore.date)]
+        let data = try? JSONSerialization.data(withJSONObject: rawData)
         var urlRequest = URLRequest(url: url)
-
+        urlRequest.httpMethod = "POST"
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpBody = data
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
             
