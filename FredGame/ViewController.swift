@@ -160,7 +160,10 @@ class ViewController: UIViewController {
     }
     
     func requestNickname() {
-        
+        if let username = prefs.string(forKey: "username") {
+                    self.username = username
+                    return
+                }
         let alertController = UIAlertController(title: "Nickname needed", message: "Please provide a nickname", preferredStyle: UIAlertController.Style.alert)
         alertController.addTextField() {
             (nicknameTextfield) in
