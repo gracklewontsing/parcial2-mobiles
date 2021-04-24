@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
-    // MARK: Variables
+    
     let generator : SequenceGenerator = SequenceGenerator()
     let top10 : Top10 = Top10()
     var buttonsGrid : [UIButton?] = [UIButton?](repeating : nil, count: 10)
@@ -16,7 +17,9 @@ class ViewController: UIViewController {
     var pressedButtonCounter : Int = 0
     var score : Int = 0
     var username = "NONAME"
-
+    var prefs: UserDefaults = UserDefaults.standard
+    
+   
     // MARK: Outlets
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var scoresButton: UIButton!
@@ -33,6 +36,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var turnIndicator: UILabel!
     @IBOutlet weak var status: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    
+
     
     // MARK: UIViewController
     override func viewDidLoad() {
@@ -43,10 +49,12 @@ class ViewController: UIViewController {
         enableActionButtons()
         playButton.isEnabled = true
         scoresButton.isEnabled = true
+        
+        //tableView.register(UITableViewCell.self, forCellReuseIdentifier: "username")
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        requestNickname()
+        if(!prefs.bool(forKey: "username")){requestNickname()}
     }
   
     // MARK: Actions
@@ -58,6 +66,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func userResponse(_ sender: UIButton) {
+        
+        
         let pressedButtonIndex = buttonsGrid.firstIndex(of: sender)
         let currentPendingCounter = Int(self.pendingCounter.text!)
         let newPendingCounter = currentPendingCounter! - 1
@@ -150,6 +160,7 @@ class ViewController: UIViewController {
     }
     
     func requestNickname() {
+        
         let alertController = UIAlertController(title: "Nickname needed", message: "Please provide a nickname", preferredStyle: UIAlertController.Style.alert)
         alertController.addTextField() {
             (nicknameTextfield) in
@@ -162,6 +173,9 @@ class ViewController: UIViewController {
             let textFields = alertController.textFields
             let nicknameTextfield = textFields?.first
             self.username = nicknameTextfield?.text! ?? "NONAME"
+            
+            self.prefs.set(self.username, forKey:"username")
+            self.prefs.synchronize()
         }
         alertController.addAction(doneAction)
 

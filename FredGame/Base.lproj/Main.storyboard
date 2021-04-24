@@ -296,7 +296,7 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="vgL-ca-fu0" id="zZ8-C0-qdu"/>
+                                    <outlet property="dataSource" destination="vgL-ca-fu0" id="Bnd-ZE-ROy"/>
                                     <outlet property="delegate" destination="vgL-ca-fu0" id="2S7-dm-V4n"/>
                                 </connections>
                             </tableView>
@@ -307,6 +307,7 @@
                     <navigationItem key="navigationItem" id="Urd-rf-AY9"/>
                     <connections>
                         <outlet property="scoreTableView" destination="ZqV-CO-XIX" id="kde-VZ-4Dg"/>
+                        <outlet property="view" destination="9w1-I7-C4m" id="Vmd-AH-BP7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1e8-gF-SKU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

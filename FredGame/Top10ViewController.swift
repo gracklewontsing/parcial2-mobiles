@@ -39,7 +39,7 @@ class Top10ViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let score = top10data?.getList()[indexPath.row]
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "YYYY-MM-DD"
+            dateFormatter.dateFormat = "YYYY-MM-dd"
             let formattedDate = dateFormatter.string(from: score!.date)
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.textLabel!.text = formattedDate + " " + score!.name + " " + String(score!.points)
