@@ -12,7 +12,12 @@ class Top10ViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var scoreTableView: UITableView!
     
     func configureView() {
-        
+        top10data!.loadData {
+                    DispatchQueue.main.async {
+                        self.scoreTableView.reloadData()
+                        
+                    }
+                }
     }
     
     override func viewDidLoad() {
